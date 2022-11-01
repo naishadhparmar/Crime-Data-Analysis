@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Impact of Criminal Policy Changes on Crime Rate in the United States"
+author: "Naishadh Parmar and Lylybell Teran"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
