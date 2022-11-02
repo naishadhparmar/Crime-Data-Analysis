@@ -75,8 +75,13 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="proposal.html"><a href="proposal.html"><i class="fa fa-check"></i><b>2</b> Proposal</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="proposal.html"><a href="proposal.html#research-topic"><i class="fa fa-check"></i><b>2.1</b> Research topic</a></li>
-<li class="chapter" data-level="2.2" data-path="proposal.html"><a href="proposal.html#data-availability"><i class="fa fa-check"></i><b>2.2</b> Data availability</a></li>
+<li class="chapter" data-level="2.1" data-path="proposal.html"><a href="proposal.html#research-topic-impact-of-criminal-policy-changes-on-crime-rate-in-the-united-states"><i class="fa fa-check"></i><b>2.1</b> Research topic: Impact of Criminal Policy Changes on Crime Rate in the United States</a></li>
+<li class="chapter" data-level="2.2" data-path="proposal.html"><a href="proposal.html#data-availability"><i class="fa fa-check"></i><b>2.2</b> Data availability</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="proposal.html"><a href="proposal.html#crime"><i class="fa fa-check"></i><b>2.2.1</b> Crime</a></li>
+<li class="chapter" data-level="2.2.2" data-path="proposal.html"><a href="proposal.html#imprisonment"><i class="fa fa-check"></i><b>2.2.2</b> Imprisonment</a></li>
+<li class="chapter" data-level="2.2.3" data-path="proposal.html"><a href="proposal.html#justice-policy-changes"><i class="fa fa-check"></i><b>2.2.3</b> Justice policy changes</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
@@ -108,12 +113,214 @@
             <section class="normal" id="section-">
 <div id="proposal" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Proposal<a href="proposal.html#proposal" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="research-topic" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Research topic<a href="proposal.html#research-topic" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="research-topic-impact-of-criminal-policy-changes-on-crime-rate-in-the-united-states" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Research topic: Impact of Criminal Policy Changes on Crime Rate in the United States<a href="proposal.html#research-topic-impact-of-criminal-policy-changes-on-crime-rate-in-the-united-states" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>According to the Wall Street Journal opinion <a href="https://www.wsj.com/articles/safe-streets-are-a-policy-choice-incapacitation-incarceration-state-federal-prison-violent-crime-1990s-reagan-bush-barr-obama-sentencing-bail-11666785403">Rising Crime Rates Are a Policy Choice</a>, strict U.S. incarceration laws lead to a decrease in crime rates. The article suggests that the implementation of stricter criminal justice policies via a conservative agenda has consistently kept violent crime in check in the past. It claims that in 1991 five out of eight released felons were arrested again for new crimes within three years which coined the term ‘revolving door policy’ meaning weak incarceration laws lead to an increase in crime by repeat offenders. The George H.W. Bush administration was the first to double the federal prison capacity – a practice that was continued by presidents Bill Clinton and George W. Bush from 1991 to 2013. The article claims that as a result of these practices, violent crime plummeted throughout these 23 years as the number of prisoners went from 800,000 to 1.6 million. Furthermore, the article claims that crime rates resurged as progressive policies were reinstated during the Obama administration. These historical trends have ultimately cultivated a popular narrative where U.S. crime rates are said to be directly influenced by the severity of incarceration laws. This project is to perform a statistical analysis of these claims. We want data to tell a story and see if that story matches with this opinion.</p>
 </div>
 <div id="data-availability" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Data availability<a href="proposal.html#data-availability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this project, we need broadly three types of data over time:</p>
+<ol style="list-style-type: decimal">
+<li><p>Crime</p></li>
+<li><p>Imprisonment</p></li>
+<li><p>Justice policy changes</p></li>
+</ol>
+<p>The sources for these data points are described below:</p>
+<div id="crime" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Crime<a href="proposal.html#crime" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Crime data is sourced using the <a href="https://www.fbi.gov/how-we-can-help-you/need-an-fbi-service-or-more-information/ucr" title="Uniform Crime Reporting (UCR) program">Uniform Crime Reporting (UCR) program</a>. More than 18,000 law enforcement agencies at different administrative levels (from federal to city) voluntarily submit data to the state UCR or directly to FBI’s UCR. The UCR program is used by criminal justice researchers and students.</p>
+<p>Yearwise UCR data is visited using the <a href="https://ucr.fbi.gov/crime-in-the-u.s/">index of UCR publications</a></p>
+<p>From 1995 to 1998, data is in a pdf format. From 1999 to 2019, crime data is directly available in Table 5 (except for 2016, where the data is available in Table 3) in xls format categorized by state, nature of offense and kind of area. Year-wise data is described below:</p>
+<table>
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="21%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Year</th>
+<th align="center">Link</th>
+<th align="center">Format</th>
+<th align="center">How to import?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1995</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec2.pdf" title="https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec2.pdf">Link</a> Table 5</td>
+<td align="center">pdf</td>
+<td align="center">Using tabulizer package</td>
+</tr>
+<tr class="even">
+<td align="center">1996</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf" title="https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf">Link</a> Table 5</td>
+<td align="center">pdf</td>
+<td align="center">Using tabulizer package</td>
+</tr>
+<tr class="odd">
+<td align="center">1997</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/1997/97sec2.pdf" title="https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf">Link</a> Table 5</td>
+<td align="center">pdf</td>
+<td align="center">Using tabulizer package</td>
+</tr>
+<tr class="even">
+<td align="center">1998</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/1998/98sec2.pdf" title="https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf">Link</a> Table 5</td>
+<td align="center">pdf</td>
+<td align="center">Using tabulizer package</td>
+</tr>
+<tr class="odd">
+<td align="center">1999</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/1999/table5_state99.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/1999/table5_state99.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2000</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2000/table5_state00.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2000/table5_state00.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2001</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2001/table5_state01.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2001/table5_state01.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2002</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2002/table-5-crime-in-the-u.s.-by-state-2002-xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2002/table-5-crime-in-the-u.s.-by-state-2002-xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2003</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2003/table5_state03.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2003/table5_state03.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2004</td>
+<td align="center"><a href="https://www2.fbi.gov/ucr/cius_04/documents/04tbl05a.xls" title="https://www2.fbi.gov/ucr/cius_04/documents/04tbl05a.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2005</td>
+<td align="center"><a href="https://www2.fbi.gov/ucr/05cius/data/documents/05tbl05.xls" title="https://www2.fbi.gov/ucr/05cius/data/documents/05tbl05.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2006</td>
+<td align="center"><a href="https://www2.fbi.gov/ucr/cius2006/data/documents/06tbl05.xls" title="https://www2.fbi.gov/ucr/cius2006/data/documents/06tbl05.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2007</td>
+<td align="center"><a href="https://www2.fbi.gov/ucr/cius2007/data/documents/07tbl05.xls" title="https://www2.fbi.gov/ucr/cius2007/data/documents/07tbl05.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2008</td>
+<td align="center"><a href="https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl05.xls" title="https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl05.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2009</td>
+<td align="center"><a href="https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl05.xls" title="https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl05.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2010</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl05.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl05.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2011</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-5/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-5/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2012</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2012.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2012.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2013</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2013.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2013.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2014</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-5/table_5_crime_in_the_united_states_by_state_2014.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-5/table_5_crime_in_the_united_states_by_state_2014.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2015</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-5/table_5_crime_in_the_united_states_by_state_2015.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-5/table_5_crime_in_the_united_states_by_state_2015.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2016</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-3/table-3.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-3/table-3.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2017</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-5/table-5.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-5/table-5.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="even">
+<td align="center">2018</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-5/table-5.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-5/table-5.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+<tr class="odd">
+<td align="center">2019</td>
+<td align="center"><a href="https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/output.xls" title="https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/output.xls">Link</a></td>
+<td align="center">xls</td>
+<td align="center">Using readxl package</td>
+</tr>
+</tbody>
+</table>
+<p>All of these tables have number of cases reported by state, area (metropolitan statistical area, cities outside metropolitan areas, nonmetropolitan counties) and nature of offense (murder and nonnegligent manslaughter, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson). For every kind of area, the estimated population is present and if the percentage of area reporting is less than 100%, it has an estimated total computed using <a href="https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/@@template-layout-view?override-view=data-declaration">this method</a>. We will always use estimated total where available. The data has states and areas in columns and the nature of offense in rows.</p>
+<p>We will read this data and iteratively go through every state and area, choose the estimated total (if available, else area actually reporting), keep those numbers and pivot longer so that the final table has year, state, area, nature of offense, population and number of cases as the columns.</p>
+<p>We take historical crime data for the whole of United States from 1976 to 1980 from Table 1 of the <a href="https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec2.pdf">1995 report</a> (pdf format), from 1981 to 1999 from <a href="https://ucr.fbi.gov/crime-in-the-u.s/2000/table1_crime81-00.xls">Table 1 of the 2000 report</a> (xls format) and from 2000 to 2019 from <a href="https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-1/table-1.xls/output.xls">Table 1 of the 2019 report</a> (xls format). These tables have total number of cases in the United States reported by year and nature of offense (murder and nonnegligent manslaughter, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson) along with the total population of the United States for each year. We will also pivot longer this table so that the final table has year, nature of offense, population and number of cases as the columns.</p>
+<p>With such a dissection of crime data by state, area and nature of offense, we intend to investigate if the change in crime index across the United States is driven by only one state, area or nature of offense.</p>
+</div>
+<div id="imprisonment" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Imprisonment<a href="proposal.html#imprisonment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Imprisonment data is sourced from using the <a href="https://bjs.ojp.gov/data-collection/national-prisoner-statistics-nps-program">National Prisoner Statistics (NPS) program</a>. The Bureau of Justice Statistics has compiled data from NPS as quick tables. We use <a href="https://csat.bjs.ojp.gov/assets/documents/QT_total%20admissions_total.xlsx">total number of prison admissions from 1978 to 2019</a> and <a href="https://csat.bjs.ojp.gov/assets/documents/QT_total%20releases_total.xlsx">total number of prison releases from 1978 to 2019</a>. Both of these tables are in xlsx format so we will use <code>readxl</code> package to import it into R. These tables have the total number of prison admissions and releases by year and by state. The states are along a column and the years are along a row so we will pivot longer so that the final table has state, year and number of prisoners admitted/released as columns.</p>
+</div>
+<div id="justice-policy-changes" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Justice policy changes<a href="proposal.html#justice-policy-changes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Major justice policy changes are listed in <a href="https://stacker.com/stories/5542/history-us-justice-system">this article</a>. This article has led to discovering the following major policy changes which will be a part of this project:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://www.congress.gov/bill/98th-congress/senate-bill/1762">Comprehensive Crime Control Act of 1984</a></p></li>
+<li><p><a href="https://www.congress.gov/bill/103rd-congress/house-bill/3355/text">Violent Crime Control and Law Enforcement Act of 1984</a></p></li>
+<li><p><a href="https://www.law.cornell.edu/supremecourt/text/536/304">Atkins v. Virginia</a></p></li>
+<li><p><a href="https://supreme.justia.com/cases/federal/us/573/373/">Riley v. California</a></p></li>
+<li><p><a href="https://www.justice.gov/opa/pr/announcing-new-clemency-initiative-deputy-attorney-general-james-m-cole-details-broad-new">New Clemency Initiative</a></p></li>
+</ol>
+<p>If we notice major changes in trend, we will search for more policy changes in that time period and add them.</p>
 
+</div>
 </div>
 </div>
             </section>

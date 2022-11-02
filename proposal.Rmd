@@ -1,6 +1,81 @@
 # Proposal
 
-## Research topic
+## Research topic: Impact of Criminal Policy Changes on Crime Rate in the United States
+
+According to the Wall Street Journal opinion [Rising Crime Rates Are a Policy Choice](https://www.wsj.com/articles/safe-streets-are-a-policy-choice-incapacitation-incarceration-state-federal-prison-violent-crime-1990s-reagan-bush-barr-obama-sentencing-bail-11666785403), strict U.S. incarceration laws lead to a decrease in crime rates. The article suggests that the implementation of stricter criminal justice policies via a conservative agenda has consistently kept violent crime in check in the past. It claims that in 1991 five out of eight released felons were arrested again for new crimes within three years which coined the term ‘revolving door policy’ meaning weak incarceration laws lead to an increase in crime by repeat offenders. The George H.W. Bush administration was the first to double the federal prison capacity – a practice that was continued by presidents Bill Clinton and George W. Bush from 1991 to 2013. The article claims that as a result of these practices, violent crime plummeted throughout these 23 years as the number of prisoners went from 800,000 to 1.6 million. Furthermore, the article claims that crime rates resurged as progressive policies were reinstated during the Obama administration. These historical trends have ultimately cultivated a popular narrative where U.S. crime rates are said to be directly influenced by the severity of incarceration laws. This project is to perform a statistical analysis of these claims. We want data to tell a story and see if that story matches with this opinion.
 
 ## Data availability
 
+For this project, we need broadly three types of data over time:
+
+1. Crime
+
+2. Imprisonment
+
+3. Justice policy changes
+
+The sources for these data points are described below:
+
+### Crime
+
+Crime data is sourced using the [Uniform Crime Reporting (UCR) program](https://www.fbi.gov/how-we-can-help-you/need-an-fbi-service-or-more-information/ucr "Uniform Crime Reporting (UCR) program"). More than 18,000 law enforcement agencies at different administrative levels (from federal to city) voluntarily submit data to the state UCR or directly to FBI's UCR. The UCR program is used by criminal justice researchers and students.
+
+Yearwise UCR data is visited using the [index of UCR publications](https://ucr.fbi.gov/crime-in-the-u.s/)
+
+From 1995 to 1998, data is in a pdf format. From 1999 to 2019, crime data is directly available in Table 5 (except for 2016, where the data is available in Table 3) in xls format categorized by state, nature of offense and kind of area. Year-wise data is described below:
+
+| Year | Link | Format | How to import? |
+| :--: | :--: | :----: | :------------: |
+| 1995 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec2.pdf "https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec2.pdf") Table 5 | pdf | Using tabulizer package |
+| 1996 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf "https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf") Table 5 | pdf | Using tabulizer package |
+| 1997 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/1997/97sec2.pdf "https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf") Table 5 | pdf | Using tabulizer package |
+| 1998 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/1998/98sec2.pdf "https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec2.pdf") Table 5 | pdf | Using tabulizer package |
+| 1999 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/1999/table5_state99.xls "https://ucr.fbi.gov/crime-in-the-u.s/1999/table5_state99.xls") | xls | Using readxl package |
+| 2000 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2000/table5_state00.xls "https://ucr.fbi.gov/crime-in-the-u.s/2000/table5_state00.xls") | xls | Using readxl package |
+| 2001 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2001/table5_state01.xls "https://ucr.fbi.gov/crime-in-the-u.s/2001/table5_state01.xls") | xls | Using readxl package |
+| 2002 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2002/table-5-crime-in-the-u.s.-by-state-2002-xls "https://ucr.fbi.gov/crime-in-the-u.s/2002/table-5-crime-in-the-u.s.-by-state-2002-xls")| xls | Using readxl package |
+| 2003 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2003/table5_state03.xls "https://ucr.fbi.gov/crime-in-the-u.s/2003/table5_state03.xls") | xls | Using readxl package |
+| 2004 | [Link](https://www2.fbi.gov/ucr/cius_04/documents/04tbl05a.xls "https://www2.fbi.gov/ucr/cius_04/documents/04tbl05a.xls") | xls | Using readxl package |
+| 2005 | [Link](https://www2.fbi.gov/ucr/05cius/data/documents/05tbl05.xls "https://www2.fbi.gov/ucr/05cius/data/documents/05tbl05.xls") | xls | Using readxl package |
+| 2006 | [Link](https://www2.fbi.gov/ucr/cius2006/data/documents/06tbl05.xls "https://www2.fbi.gov/ucr/cius2006/data/documents/06tbl05.xls") | xls | Using readxl package |
+| 2007 | [Link](https://www2.fbi.gov/ucr/cius2007/data/documents/07tbl05.xls "https://www2.fbi.gov/ucr/cius2007/data/documents/07tbl05.xls") | xls | Using readxl package |
+| 2008 | [Link](https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl05.xls "https://www2.fbi.gov/ucr/cius2008/data/documents/08tbl05.xls") | xls | Using readxl package |
+| 2009 | [Link](https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl05.xls "https://www2.fbi.gov/ucr/cius2009/data/documents/09tbl05.xls") | xls | Using readxl package |
+| 2010 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl05.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl05.xls/output.xls") | xls | Using readxl package |
+| 2011 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-5/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-5/output.xls") | xls | Using readxl package |
+| 2012 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2012.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2012.xls/output.xls") | xls | Using readxl package |
+| 2013 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2013.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/5tabledatadecpdf/table_5_crime_in_the_united_states_by_state_2013.xls/output.xls") | xls | Using readxl package |
+| 2014 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-5/table_5_crime_in_the_united_states_by_state_2014.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-5/table_5_crime_in_the_united_states_by_state_2014.xls/output.xls") | xls | Using readxl package |
+| 2015 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-5/table_5_crime_in_the_united_states_by_state_2015.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-5/table_5_crime_in_the_united_states_by_state_2015.xls/output.xls") | xls | Using readxl package |
+| 2016 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-3/table-3.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-3/table-3.xls/output.xls") | xls | Using readxl package |
+| 2017 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-5/table-5.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-5/table-5.xls/output.xls") | xls | Using readxl package |
+| 2018 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-5/table-5.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/tables/table-5/table-5.xls/output.xls") | xls | Using readxl package |
+| 2019 | [Link](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/output.xls "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/output.xls") | xls | Using readxl package |
+
+All of these tables have number of cases reported by state, area (metropolitan statistical area, cities outside metropolitan areas, nonmetropolitan counties) and nature of offense (murder and nonnegligent manslaughter, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson). For every kind of area, the estimated population is present and if the percentage of area reporting is less than 100%, it has an estimated total computed using [this method](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-5/table-5.xls/@@template-layout-view?override-view=data-declaration). We will always use estimated total where available. The data has states and areas in columns and the nature of offense in rows.
+
+We will read this data and iteratively go through every state and area, choose the estimated total (if available, else area actually reporting), keep those numbers and pivot longer so that the final table has year, state, area, nature of offense, population and number of cases as the columns.
+
+We take historical crime data for the whole of United States from 1976 to 1980 from Table 1 of the [1995 report](https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec2.pdf) (pdf format), from 1981 to 1999 from [Table 1 of the 2000 report](https://ucr.fbi.gov/crime-in-the-u.s/2000/table1_crime81-00.xls) (xls format) and from 2000 to 2019 from [Table 1 of the 2019 report](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-1/table-1.xls/output.xls) (xls format). These tables have total number of cases in the United States reported by year and nature of offense (murder and nonnegligent manslaughter, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson) along with the total population of the United States for each year. We will also pivot longer this table so that the final table has year, nature of offense, population and number of cases as the columns.
+
+With such a dissection of crime data by state, area and nature of offense, we intend to investigate if the change in crime index across the United States is driven by only one state, area or nature of offense.
+
+### Imprisonment
+
+Imprisonment data is sourced from using the [National Prisoner Statistics (NPS) program](https://bjs.ojp.gov/data-collection/national-prisoner-statistics-nps-program). The Bureau of Justice Statistics has compiled data from NPS as quick tables. We use [total number of prison admissions from 1978 to 2019](https://csat.bjs.ojp.gov/assets/documents/QT_total%20admissions_total.xlsx) and [total number of prison releases from 1978 to 2019](https://csat.bjs.ojp.gov/assets/documents/QT_total%20releases_total.xlsx). Both of these tables are in xlsx format so we will use `readxl` package to import it into R. These tables have the total number of prison admissions and releases by year and by state. The states are along a column and the years are along a row so we will pivot longer so that the final table has state, year and number of prisoners admitted/released as columns.
+
+### Justice policy changes
+
+Major justice policy changes are listed in [this article](https://stacker.com/stories/5542/history-us-justice-system). This article has led to discovering the following major policy changes which will be a part of this project:
+
+1. [Comprehensive Crime Control Act of 1984](https://www.congress.gov/bill/98th-congress/senate-bill/1762)
+
+2. [Violent Crime Control and Law Enforcement Act of 1984](https://www.congress.gov/bill/103rd-congress/house-bill/3355/text)
+
+3. [Atkins v. Virginia](https://www.law.cornell.edu/supremecourt/text/536/304)
+
+4. [Riley v. California](https://supreme.justia.com/cases/federal/us/573/373/)
+
+5. [New Clemency Initiative](https://www.justice.gov/opa/pr/announcing-new-clemency-initiative-deputy-attorney-general-james-m-cole-details-broad-new)
+
+If we notice major changes in trend, we will search for more policy changes in that time period and add them.

@@ -1,7 +1,10 @@
 introduction
 proposal
-research-topic
+research-topic-impact-of-criminal-policy-changes-on-crime-rate-in-the-united-states
 data-availability
+crime
+imprisonment
+justice-policy-changes
 data
 sources
 cleaning-transformation
