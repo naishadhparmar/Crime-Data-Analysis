@@ -12,3 +12,6 @@ missing-value-analysis
 results
 interactive-component
 conclusion
+crime-1
+crime-2
+crime-3

@@ -2,7 +2,86 @@
 
 ## Sources
 
+As described in the proposal, we look at three types of data over time:
+
+### Crime
+
+Crime data is sourced using the [Uniform Crime Reporting (UCR) program](https://www.fbi.gov/how-we-can-help-you/need-an-fbi-service-or-more-information/ucr "Uniform Crime Reporting (UCR) program"). More than 18,000 law enforcement agencies at different administrative levels (from federal to city) voluntarily submit data to the state UCR or directly to FBI's UCR. The UCR program is used by criminal justice researchers and students.
+
+Yearwise UCR data is visited using the [index of UCR publications](https://ucr.fbi.gov/crime-in-the-u.s/). In the proposal, we had planned to extract data of 1995 to 1998 as well, but these are in pdf format and was turning out to be rather difficult to extract. Besides, we can take data from 1999 as well to roughly compare the Bush administration vs the Obama administration in terms of crime. From 1999 to 2019, crime data is directly available in Table 5 (except for 2016, where the data is available in Table 3) in xls format categorized by state, nature of offense and kind of area.
+
 ## Cleaning / transformation
+
+### Crime
+
+Raw crime data across all years is made in Excel and doesn't have a clear table structure. For example,
+
+![Snapshot of data](figures/Data_snapshot.png)
+
+Data from 1999-2002 have a similar format so they are extracted using `data_collection/1999-2002.R`. Data from 2003 and 2004 are peculiar so they ar extracted using `data_collection/2003.R` and `data_collection/2004.R`. Data from 2013-2016 have a similar format so they are extracted using `data_collection/2013-2016.R`. The rest of the data is extracted using `data_collection/2005-2012, 2017-2019.R`. The xls links to these years is saved in `metadata/crime_data_links.csv` so that we don't have to hardcode URLs.
+
+```{r, echo=TRUE}
+library(dplyr)
+library(readxl)
+crimes_links <- read.csv('metadata/crime_data_links.csv')
+source("data_collection/1999-2002.R", local = knitr::knit_global())
+source("data_collection/2003.R", local = knitr::knit_global())
+source("data_collection/2004.R", local = knitr::knit_global())
+source("data_collection/2005-2012, 2017-2019.R", local = knitr::knit_global())
+source("data_collection/2013-2016.R", local = knitr::knit_global())
+crime_all_data <- NULL
+for(year in 1999:2002) {
+  if(is.null(crime_all_data)) crime_all_data <- getdata.1999(crimes_links, year)
+  else crime_all_data = bind_rows(crime_all_data, getdata.1999(crimes_links, year))
+}
+for(year in 2003:2003) crime_all_data = bind_rows(crime_all_data, getdata.2003(crimes_links, year))
+for(year in 2004:2004) crime_all_data = bind_rows(crime_all_data, getdata.2004(crimes_links, year))
+for(year in 2005:2012) crime_all_data = bind_rows(crime_all_data, getdata.2005(crimes_links, year))
+for(year in 2013:2016) crime_all_data = bind_rows(crime_all_data, getdata.2013(crimes_links, year))
+for(year in 2017:2019) crime_all_data = bind_rows(crime_all_data, getdata.2005(crimes_links, year))
+```
+
+Some of the states were read with a whitespace or a comma so we'll clean that up.
+
+```{r, echo=TRUE}
+library(stringr)
+crime_all_data['State'] <- lapply(crime_all_data['State'], function(x) str_trim(gsub(',', '', x)))
+print(nrow(unique(crime_all_data['State'])))
+crime_all_data$State <- as.factor(crime_all_data$State)
+```
+
+As stated in the [2003 crime report summary](https://ucr.fbi.gov/crime-in-the-u.s/2003/03sec1.pdf "Uniform Crime Reporting (UCR) program"), they started referring to rural counties as metropolitan counties, so we change the area name in the previous years for one-to-one correspondence. In the District of Columbia, the report saves the district-wide crime numbers as "Total" instead of "State Total" since DC is not technically a state. We change the label of that as well to "State Total" just for one-to-one correspondence.
+
+```{r, echo=TRUE}
+crime_all_data[crime_all_data['Area'] == 'Rural', 'Area'] <- 'Nonmetropolitan counties'
+crime_all_data[crime_all_data['Area'] == 'Total', 'Area'] <- 'State Total'
+unique(crime_all_data['Area'])
+crime_all_data$Area <- as.factor(crime_all_data$Area)
+```
+
+Finally, we also convert the year to a factor and the rest of the numbers to integer
+
+```{r, echo=TRUE}
+crime_all_data$Year <- as.factor(crime_all_data$Year)
+crime_all_data$Population <- as.numeric(crime_all_data$Population)
+crime_all_data$Violent <- as.numeric(crime_all_data$Violent)
+crime_all_data$Property <- as.numeric(crime_all_data$Property)
+crime_all_data$Murder <- as.numeric(crime_all_data$Murder)
+crime_all_data$Rape <- as.numeric(crime_all_data$Rape)
+crime_all_data$Robbery <- as.numeric(crime_all_data$Robbery)
+crime_all_data$Assault <- as.numeric(crime_all_data$Assault)
+crime_all_data$Burglary <- as.numeric(crime_all_data$Burglary)
+crime_all_data$Theft <- as.numeric(crime_all_data$Theft)
+crime_all_data$Motor <- as.numeric(crime_all_data$Motor)
+crime_all_data$Arson <- as.numeric(crime_all_data$Arson)
+```
 
 ## Missing value analysis
 
+### Crime
+
+There are no missing values in Year, State and Area. There are some missing values in crime categories other than arson, which we checked is actually blank in the raw data. For now, we will keep the missing values as they are and impute values based on the graphics we decide to plot. Arson has been blank or missing in all raw data across all year so we will drop that column.
+
+```{r, echo=TRUE}
+crime_all_data <- crime_all_data[, -14]
+```
