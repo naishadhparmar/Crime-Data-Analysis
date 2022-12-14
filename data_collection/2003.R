@@ -1,5 +1,4 @@
 getdata.2003 <- function(crimes_links, year) {
-  year
   library(httr)
   library(stringr)
   tmp <- tempfile(fileext = '.xls')
