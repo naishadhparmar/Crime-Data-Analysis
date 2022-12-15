@@ -1,2 +1,7 @@
 # Conclusion
 
+In the year 2002, we observe an increase in imprisonment rates across the shortlisted states. This year correlates with the passing of Atkins v. Virginia under which the U.S. was under a republican party. In the year 2014, we observe a decrease in imprisonment rates across the shortlisted states. This year saw a democratic election with the enforcement of policies that stemmed from Riley v. California and the New Clemency Initiative. So, in terms of imprisonment rates, the data agrees with the opinion's claim.
+
+However, crime rates aren't necessarily negatively tracking imprisonment rates, i.e., crime rates aren't necessarily increasing with a decrease in imprisonment rates. For example, in Texas, Vermont, Florida and California, crime rates are decreasing with a decrease in imprisonment rates. The only state that shows significant negative correlation is West Virginia.
+
+Overall, the analysis of imprisonment data and crime data don't given enough evidence to support the article's claim.

@@ -23,7 +23,7 @@
 <meta name="author" content="Naishadh Parmar and Lylybell Teran" />
 
 
-<meta name="date" content="2022-11-01" />
+<meta name="date" content="2022-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -85,11 +85,31 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#sources"><i class="fa fa-check"></i><b>3.1</b> Sources</a></li>
-<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#cleaning-transformation"><i class="fa fa-check"></i><b>3.2</b> Cleaning / transformation</a></li>
-<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#missing-value-analysis"><i class="fa fa-check"></i><b>3.3</b> Missing value analysis</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#sources"><i class="fa fa-check"></i><b>3.1</b> Sources</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#crime-1"><i class="fa fa-check"></i><b>3.1.1</b> Crime</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#imprisonment-1"><i class="fa fa-check"></i><b>3.1.2</b> Imprisonment</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>4</b> Results</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#cleaning-transformation"><i class="fa fa-check"></i><b>3.2</b> Cleaning / transformation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data.html"><a href="data.html#crime-2"><i class="fa fa-check"></i><b>3.2.1</b> Crime</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data.html"><a href="data.html#imprisonment-2"><i class="fa fa-check"></i><b>3.2.2</b> Imprisonment</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#missing-value-analysis"><i class="fa fa-check"></i><b>3.3</b> Missing value analysis</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data.html"><a href="data.html#crime-3"><i class="fa fa-check"></i><b>3.3.1</b> Crime</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data.html"><a href="data.html#imprisonment-3"><i class="fa fa-check"></i><b>3.3.2</b> Imprisonment</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>4</b> Results</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="results.html"><a href="results.html#analysis-of-crime-and-imprisonment"><i class="fa fa-check"></i><b>4.1</b> Analysis of crime and imprisonment</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="results.html"><a href="results.html#crime-4"><i class="fa fa-check"></i><b>4.1.1</b> Crime</a></li>
+<li class="chapter" data-level="4.1.2" data-path="results.html"><a href="results.html#imprisonment-analysis"><i class="fa fa-check"></i><b>4.1.2</b> Imprisonment Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="results.html"><a href="results.html#analysis-of-imprisonment-with-crime"><i class="fa fa-check"></i><b>4.2</b> Analysis of imprisonment with crime</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>5</b> Interactive component</a></li>
 <li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -114,10 +134,17 @@
 <div id="header">
 <h1 class="title">Impact of Criminal Policy Changes on Crime Rate in the United States</h1>
 <p class="author"><em>Naishadh Parmar and Lylybell Teran</em></p>
-<p class="date"><em>2022-11-01</em></p>
+<p class="date"><em>2022-12-14</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The United States leads the world in the total number of people incarcerated. Throughput U.S. history, we have seen a variety of policy enforcement to support either of the two prevalent goals. The U.S. either keeps prisoners sentenced in order to keep crime off the streets or mitigate their sentences in hopes of rehabilitating prisoners. These goals are correlated with the presidential party affiliation. According to popular claims, a Republican presidential term leads to conservative legislation where it is believed that increased crime rates are due to low imprisonment rates – therefore conservative ruled years have typically stiffen policies and increased federal and state prison capacities to incarcerate more offenders. By contrast, Democratic presidential terms have led to progressive moments to reduce sentences and police funding in attempts to give prisoners a second chance. Controversy over these progressive claims have coined the term “revolving door” which explains rise in crime and imprisonment rates due to liniment policies.</p>
+<p>Our analysis is an attempt to explore these claims by either supporting or rebuking the correlation between presidential policy affiliation along with crime and imprisonment rates. We will be focusing on key political events to answer the following questions throughout our exploratory data analysis.</p>
+<ol style="list-style-type: decimal">
+<li>Is there a correlation between crime rates and imprisonment rates throughout states in the U.S.?</li>
+<li>Are low crime rates correlated with high imprisonment rates during conservative years?</li>
+<li>Are high crime rates correlate with low imprisonment rates during progressive years?</li>
+</ol>
 
 </div>
             </section>

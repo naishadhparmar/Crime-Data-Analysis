@@ -24,7 +24,7 @@ Raw crime data across all years is made in Excel and doesn't have a clear table 
 
 Data from 1999-2002 have a similar format so they are extracted using `data_collection/1999-2002.R`. Data from 2003 and 2004 are peculiar so they ar extracted using `data_collection/2003.R` and `data_collection/2004.R`. Data from 2013-2016 have a similar format so they are extracted using `data_collection/2013-2016.R`. The rest of the data is extracted using `data_collection/2005-2012, 2017-2019.R`. The xls links to these years is saved in `metadata/crime_data_links.csv` so that we don't have to hardcode URLs.
 
-```{r, echo=TRUE}
+```{r, load-crime, echo=TRUE}
 library(dplyr)
 library(readxl)
 crimes_links <- read.csv('metadata/crime_data_links.csv')
@@ -47,25 +47,23 @@ for(year in 2017:2019) crime_all_data = bind_rows(crime_all_data, getdata.2005(c
 
 Some of the states were read with a whitespace or a comma so we'll clean that up.
 
-```{r, echo=TRUE}
+```{r, clean-crime-1, echo=TRUE}
 library(stringr)
 crime_all_data['State'] <- lapply(crime_all_data['State'], function(x) str_trim(gsub(',', '', x)))
-print(nrow(unique(crime_all_data['State'])))
 crime_all_data$State <- as.factor(crime_all_data$State)
 ```
 
 As stated in the [2003 crime report summary](https://ucr.fbi.gov/crime-in-the-u.s/2003/03sec1.pdf "Uniform Crime Reporting (UCR) program"), they started referring to rural counties as metropolitan counties, so we change the area name in the previous years for one-to-one correspondence. In the District of Columbia, the report saves the district-wide crime numbers as "Total" instead of "State Total" since DC is not technically a state. We change the label of that as well to "State Total" just for one-to-one correspondence.
 
-```{r, echo=TRUE}
+```{r, clean-crime-2, echo=TRUE}
 crime_all_data[crime_all_data['Area'] == 'Rural', 'Area'] <- 'Nonmetropolitan counties'
 crime_all_data[crime_all_data['Area'] == 'Total', 'Area'] <- 'State Total'
-unique(crime_all_data['Area'])
 crime_all_data$Area <- as.factor(crime_all_data$Area)
 ```
 
 Finally, we also convert the year to a factor and the rest of the numbers to integer
 
-```{r, echo=TRUE}
+```{r, clean-crime-3, echo=TRUE}
 crime_all_data$Year <- as.factor(crime_all_data$Year)
 crime_all_data$Population <- as.numeric(crime_all_data$Population)
 crime_all_data$Violent <- as.numeric(crime_all_data$Violent)
@@ -82,10 +80,14 @@ crime_all_data$Arson <- as.numeric(crime_all_data$Arson)
 
 ### Imprisonment 
 
-We initiate the exploration of imprisonment data by reading in the files using `read_excel` function. Then we proceed to eliminate extra columns such as "Jurisdiction" since it is not necessary to conduct our analysis. We also properly rename our desired columns into State, Year, and Number of Prisoners. 
+We initiate the exploration of imprisonment data by reading in the files using `read_excel` function. Then we proceed to eliminate extra columns such as "Jurisdiction" since it is not necessary to conduct our analysis. We also properly rename our desired columns into State, Year, Admissions, Releases, and Rate. 
+
+1. Admissions - number of prisoners admitted into prison
+2. Releases - number of prisoners released from prison
+3. Rate - imprisonment rate per 1,000 prisoners 
 
 
-```{r, echo=TRUE}
+```{r, load-imprisonment, echo=TRUE}
 # read in admissions excel file
 admissions_data <- read_excel("data_collection/QT_total admissions_total.xlsx", na = c("/","--"), skip = 10)
 # read in releases excel file 
@@ -93,7 +95,9 @@ releases_data <- read_excel("data_collection/QT_total releases_total.xlsx", na =
 # read in imprisonment rate excel file 
 rate_data <- read_excel("data_collection/QT_imprisonment rate_total.xlsx", na = c("/","--"), skip = 9)
 
-
+admissions_data[c(1, 2, 3), 2] <- admissions_data[c(1, 2, 3), 1]
+releases_data[c(1, 2, 3), 2] <- releases_data[c(1, 2, 3), 1]
+rate_data[c(1, 2, 3), 2] <- rate_data[c(1, 2, 3), 1]
 # remove the first column (get rid of jurisdiction)
 admissions_data <- select(admissions_data, -c(1))
 releases_data <- select(releases_data, -c(1))
@@ -110,30 +114,29 @@ admissions_data <- filter(admissions_data, is.na(State) == FALSE)
 releases_data <- filter(releases_data, is.na(State) == FALSE)
 rate_data <- filter(rate_data, is.na(State) == FALSE)
 
-
-# get rid of side descriptions 
-admissions_data <- head(admissions_data, - 9) 
-releases_data <- head(releases_data, - 10) 
-rate_data <- head(rate_data, - 10) 
+# remove state and federal
+admissions_data <- admissions_data[-c(2,3), ]
+releases_data <- releases_data[-c(2,3), ]
+rate_data <- rate_data[-c(2,3), ]
 ```
 
 Next, we proceed to relabel the State and Year columns by removing extra characters that do not provide significance in our visualizations. 
 
 
-```{r, echo=TRUE}
+```{r, clean-imprisonment-1, echo=TRUE}
 # reformatting State columns 
 bad <- admissions_data[which(str_detect(admissions_data$State , '[:punct:]')),]$State
-
 admissions_data[which(str_detect(admissions_data$State , '[:punct:]')),]$State <- str_sub(bad, end = -3)
-
-bad_1 <- admissions_data[which(str_detect(releases_data$State , '[:punct:]')),]$State
-
-releases_data[which(str_detect(releases_data$State , '[:punct:]')),]$State <- str_sub(bad_1, end = -2)
-
-bad_2 <- admissions_data[which(str_detect(rate_data$State , '[:punct:]')),]$State
-
-rate_data[which(str_detect(rate_data$State , '[:punct:]')),]$State <- str_sub(bad_2, end = -1)
-
+bad_1 <- releases_data[which(str_detect(releases_data$State , '[:punct:]')),]$State
+releases_data[which(str_detect(releases_data$State , '[:punct:]')),]$State <- str_sub(bad_1, end = -3)
+bad_2 <- rate_data[which(str_detect(rate_data$State , '[:punct:]')),]$State
+rate_data[which(str_detect(rate_data$State , '[:punct:]')),]$State <- str_sub(bad_2, end = -3)
+admissions_data$State <- toupper(admissions_data$State)
+releases_data$State <- toupper(releases_data$State)
+rate_data$State <- toupper(rate_data$State)
+admissions_data[1, 1] <- 'TOTAL'
+releases_data[1, 1] <- 'TOTAL'
+rate_data[1, 1] <- 'TOTAL'
 # rename certain year column 
 admissions_data <- rename(admissions_data, '2013' = "2013/b")
 releases_data <- rename(releases_data, '2013' = "2013/b,c", '2014' = '2014/c', '2015' = '2015/c')
@@ -142,7 +145,7 @@ releases_data <- rename(releases_data, '2013' = "2013/b,c", '2014' = '2014/c', '
 
 All of the three tables are in xlsx format so we will use `readxl` package to import it into R. These tables have the total number of prison admissions, releases, and imprisonment rates by year and by state. The states are along a column and the years are along a row so we will `pivot_longer()` function so that the final table has state, year and number of prisoners admitted/released/rates as columns.
 
-```{r, echo=TRUE}
+```{r, clean-imprisonment-2, echo=TRUE}
 library("tidyr")
 # admissions data to long format
 admissions_data_long <- pivot_longer(admissions_data, cols = 2:ncol(admissions_data) , names_to = "Year", values_to = "Admissions")
@@ -157,7 +160,7 @@ rate_data_long <- pivot_longer(rate_data, cols = 2:ncol(rate_data) , names_to = 
 Now that we have converted all three data frames into the desired long format, we can proceed to apply an inner join on the admissions_data_long and releases_data_long by State and Year. Then we apply another inner join on the resulting data frame with the rate_data_long. Now we have one clean table that encapsulates five columns: State, Year, Admissions, Releases, and Rate and 1,512 rows of entries. 
 
 
-```{r, echo=TRUE}
+```{r, clean-imprisonment-3, echo=TRUE}
 # inner merge on admissions and releases data
 admissions_releases_data <- merge(x=admissions_data_long, y=releases_data_long, 
              by=c("State", "Year"))
@@ -167,7 +170,7 @@ total_imprisonment_data <- merge(x=admissions_releases_data, y=rate_data_long,
 
 # adding factor levels to State and Year
 total_imprisonment_data$State <- as.factor(total_imprisonment_data$State)
-total_imprisonment_data$Year <- as.numeric(total_imprisonment_data$Year)
+total_imprisonment_data$Year <- as.factor(total_imprisonment_data$Year)
 ```
 
 
@@ -183,10 +186,11 @@ library(naniar)
 vis_miss(crime_all_data)
 ```
 
-There are no missing values in Year, State, Area and Population. There are some missing values in crime categories other than arson, which we checked is actually blank in the raw data. For now, we will keep the missing values as they are and impute values based on the graphics we decide to plot. Arson has been blank or missing in all raw data across all years so we will drop that column.
+There are no missing values in Year, State, Area and Population. There are some missing values in crime categories other than arson, which we checked is actually blank in the raw data. We will fill these with 0. Arson has been blank or missing in all raw data across all years so we will drop that column.
 
-```{r, echo=TRUE}
+```{r, missing-crime, echo=TRUE}
 crime_all_data <- crime_all_data[, -14]
+crime_all_data[is.na(crime_all_data)] <- 0
 ```
 
 ### Imprisonment 

@@ -7,3 +7,10 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+The United States leads the world in the total number of people incarcerated. Throughput U.S. history, we have seen a variety of policy enforcement to support either of the two prevalent goals. The U.S. either keeps prisoners sentenced in order to keep crime off the streets or mitigate their sentences in hopes of rehabilitating prisoners. These goals are correlated with the presidential party affiliation. According to popular claims, a Republican presidential term leads to conservative legislation where it is believed that increased crime rates are due to low imprisonment rates -- therefore conservative ruled years have typically stiffen policies and increased federal and state prison capacities to incarcerate more offenders. By contrast, Democratic presidential terms have led to progressive moments to reduce sentences and police funding in attempts to give prisoners a second chance. Controversy over these progressive claims have coined the term "revolving door" which explains rise in crime and imprisonment rates due to liniment policies. 
+
+Our analysis is an attempt to explore these claims by either supporting or rebuking the correlation between presidential policy affiliation along with crime and imprisonment rates. We will be focusing on key political events to answer the following questions throughout our exploratory data analysis. 
+
+1. Is there a correlation between crime rates and imprisonment rates throughout states in the U.S.?
+2. Are low crime rates correlated with high imprisonment rates during conservative years? 
+3. Are high crime rates correlate with low imprisonment rates during progressive years?

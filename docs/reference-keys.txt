@@ -18,3 +18,8 @@ crime-3
 imprisonment-1
 imprisonment-2
 imprisonment-3
+imprisonment-analysis
+final-analysis
+analysis-of-crime-and-imprisonment
+crime-4
+analysis-of-imprisonment-with-crime
