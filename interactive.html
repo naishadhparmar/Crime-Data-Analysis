@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>EDAV 2022 TTh Project Group 31</title>
+    <script src="https://d3js.org/d3.v7.js"></script>
+  </head>
+
+  <body>
+    <p style="background-color:gray;" id="year">2002</p>
+    <script>
+    const w = 1000;
+    const h = 600;
+    const margin = {
+        top: 100,
+        right: 0,
+        bottom: 100,
+        left: 100
+    };
+    const innerWidth = w - margin.left - margin.right;
+    const innerHeight = h - margin.top - margin.bottom;
+    const svg = d3.select("body")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+    svg.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", w)
+        .attr("height", h)
+        .attr("fill", "white");
+    const bardata_2002 = [
+      {key:'AK', value:3396},
+      {key:'AR', value:3818},
+      {key:'CA', value:2837},
+      {key:'CT', value:2157},
+      {key:'DC', value:6427},
+      {key:'FL', value:3956},
+      {key:'IL', value:2446},
+      {key:'ME', value:2114},
+      {key:'MA', value:2248},
+      {key:'MN', value:2527},
+      {key:'NH', value:2159},
+      {key:'NM', value:4140},
+      {key:'TX', value:3425},
+      {key:'VT', value:1624},
+      {key:'WV', value:2337}];
+    const bardata_2014 = [
+      {key:'AK', value:4310},
+      {key:'AR', value:4158},
+      {key:'CA', value:3944},
+      {key:'CT', value:2997},
+      {key:'DC', value:8022},
+      {key:'FL', value:5421},
+      {key:'IL', value:4016},
+      {key:'ME', value:2656},
+      {key:'MA', value:3094},
+      {key:'MN', value:3535},
+      {key:'NH', value:2220},
+      {key:'NM', value:5078},
+      {key:'TX', value:5190},
+      {key:'VT', value:2530},
+      {key:'WV', value:2515}];      
+    const xScale = d3.scaleBand().domain(bardata_2002.map(d => d.key)).range([0, innerWidth]).paddingInner(.1);
+    const yScale = d3.scaleLinear().domain([0, 8100]).range([innerHeight, 0])
+    const xAxis = d3.axisBottom().scale(xScale);
+    const yAxis = d3.axisLeft().scale(yScale);
+    const bars = svg.append("g").attr("id", "plot")
+        .attr("transform", `translate (${margin.left}, ${margin.top})`)
+        .selectAll("rect").data(bardata_2002, d => d.key);
+    bars.enter().append("rect")
+        .attr("x", d => xScale(d.key))
+        .attr("y", d => yScale(d.value))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => innerHeight - yScale(d.value))
+        .attr("fill", "red");
+    svg.append("g")
+        .attr("class", "xAxis")
+        .attr("transform", `translate (${margin.left}, ${h - margin.bottom})`)
+        .call(xAxis);
+    svg.append("g")
+        .attr("class", "yAxis")
+        .attr("transform", `translate (${margin.left}, ${margin.top})`)
+        .call(yAxis);
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("x", -190)
+        .attr("y", 20)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Crimes per 100,000 population");
+    d3.selectAll("p")
+        .on("click", function() {
+            if(document.getElementById('year').innerText == "2002"){
+              update(bardata_2014, "blue");
+              document.getElementById('year').innerText = "2014"
+            }
+            else {
+              update(bardata_2002, "red");
+              document.getElementById('year').innerText = "2002"
+            }
+        });
+    function update(data, color) {
+        xScale.domain(d3.range(data.length));
+        const bars = svg.select("#plot")
+            .selectAll("rect")
+            .data(data, d => d.key);
+        bars
+          .transition()
+          .duration(500)
+          .ease(d3.easeLinear)
+          .attr("x", (d, i) => xScale(i))
+          .attr("y", d => yScale(d.value))
+          .attr("width", xScale.bandwidth())
+          .attr("height", d => innerHeight - yScale(d.value))
+          .attr("fill", color);
+    }
+    </script>
+  </body>
+</html>

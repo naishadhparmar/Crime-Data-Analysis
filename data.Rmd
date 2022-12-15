@@ -6,9 +6,9 @@ As described in the proposal, we look at three types of data over time:
 
 ### Crime
 
-Crime data is sourced using the [Uniform Crime Reporting (UCR) program](https://www.fbi.gov/how-we-can-help-you/need-an-fbi-service-or-more-information/ucr "Uniform Crime Reporting (UCR) program"). More than 18,000 law enforcement agencies at different administrative levels (from federal to city) voluntarily submit data to the state UCR or directly to FBI's UCR. The UCR program is used by criminal justice researchers and students.
+Crime data is sourced using the [Uniform Crime Reporting (UCR) program](https://www.fbi.gov/how-we-can-help-you/need-an-fbi-service-or-more-information/ucr "Uniform Crime Reporting (UCR) program"). The UCR program is used by criminal justice researchers and students.
 
-Yearwise UCR data is visited using the [index of UCR publications](https://ucr.fbi.gov/crime-in-the-u.s/). In the proposal, we had planned to extract data of 1995 to 1998 as well, but these are in pdf format and was turning out to be rather difficult to extract. Besides, we can take data from 1999 as well to roughly compare the Bush administration vs the Obama administration in terms of crime. From 1999 to 2019, crime data is directly available in Table 5 (except for 2016, where the data is available in Table 3) in xls format categorized by state, nature of offense and kind of area.
+Yearwise UCR data is visited using the [index of UCR publications](https://ucr.fbi.gov/crime-in-the-u.s/). In the proposal, we had planned to extract data of 1995 to 1998 as well, but these are in pdf format and was turning out to be rather difficult to extract. Besides, we can take data from 1999 as well to roughly compare the Bush administration vs the Obama administration in terms of crime. From 1999 to 2019, crime data is directly available in Table 5 (except for 2016, where the data is available in Table 3) in xls format categorized by state, nature of offense and kind of area. In the proposal, we had planned on downloading total crime rates separately, but then figured that we could sum up statewise and make do with that.
 
 ### Imprisonment 
 
@@ -24,7 +24,7 @@ Raw crime data across all years is made in Excel and doesn't have a clear table 
 
 Data from 1999-2002 have a similar format so they are extracted using `data_collection/1999-2002.R`. Data from 2003 and 2004 are peculiar so they ar extracted using `data_collection/2003.R` and `data_collection/2004.R`. Data from 2013-2016 have a similar format so they are extracted using `data_collection/2013-2016.R`. The rest of the data is extracted using `data_collection/2005-2012, 2017-2019.R`. The xls links to these years is saved in `metadata/crime_data_links.csv` so that we don't have to hardcode URLs.
 
-```{r, load-crime, echo=TRUE}
+```{r, load-crime, echo=FALSE}
 library(dplyr)
 library(readxl)
 crimes_links <- read.csv('metadata/crime_data_links.csv')
@@ -43,27 +43,30 @@ for(year in 2004:2004) crime_all_data = bind_rows(crime_all_data, getdata.2004(c
 for(year in 2005:2012) crime_all_data = bind_rows(crime_all_data, getdata.2005(crimes_links, year))
 for(year in 2013:2016) crime_all_data = bind_rows(crime_all_data, getdata.2013(crimes_links, year))
 for(year in 2017:2019) crime_all_data = bind_rows(crime_all_data, getdata.2005(crimes_links, year))
+knitr::kable(crime_all_data[1:5,])
 ```
 
 Some of the states were read with a whitespace or a comma so we'll clean that up.
 
-```{r, clean-crime-1, echo=TRUE}
+```{r, clean-crime-1, echo=FALSE}
 library(stringr)
 crime_all_data['State'] <- lapply(crime_all_data['State'], function(x) str_trim(gsub(',', '', x)))
 crime_all_data$State <- as.factor(crime_all_data$State)
+knitr::kable(crime_all_data[1:5,])
 ```
 
 As stated in the [2003 crime report summary](https://ucr.fbi.gov/crime-in-the-u.s/2003/03sec1.pdf "Uniform Crime Reporting (UCR) program"), they started referring to rural counties as metropolitan counties, so we change the area name in the previous years for one-to-one correspondence. In the District of Columbia, the report saves the district-wide crime numbers as "Total" instead of "State Total" since DC is not technically a state. We change the label of that as well to "State Total" just for one-to-one correspondence.
 
-```{r, clean-crime-2, echo=TRUE}
+```{r, clean-crime-2, echo=FALSE}
 crime_all_data[crime_all_data['Area'] == 'Rural', 'Area'] <- 'Nonmetropolitan counties'
 crime_all_data[crime_all_data['Area'] == 'Total', 'Area'] <- 'State Total'
 crime_all_data$Area <- as.factor(crime_all_data$Area)
+knitr::kable(crime_all_data[1:5,])
 ```
 
 Finally, we also convert the year to a factor and the rest of the numbers to integer
 
-```{r, clean-crime-3, echo=TRUE}
+```{r, clean-crime-3, echo=FALSE}
 crime_all_data$Year <- as.factor(crime_all_data$Year)
 crime_all_data$Population <- as.numeric(crime_all_data$Population)
 crime_all_data$Violent <- as.numeric(crime_all_data$Violent)
@@ -87,7 +90,7 @@ We initiate the exploration of imprisonment data by reading in the files using `
 3. Rate - imprisonment rate per 1,000 prisoners 
 
 
-```{r, load-imprisonment, echo=TRUE}
+```{r, load-imprisonment, echo=FALSE}
 # read in admissions excel file
 admissions_data <- read_excel("data_collection/QT_total admissions_total.xlsx", na = c("/","--"), skip = 10)
 # read in releases excel file 
@@ -118,12 +121,15 @@ rate_data <- filter(rate_data, is.na(State) == FALSE)
 admissions_data <- admissions_data[-c(2,3), ]
 releases_data <- releases_data[-c(2,3), ]
 rate_data <- rate_data[-c(2,3), ]
+knitr::kable(admissions_data[1:5,])
+knitr::kable(releases_data[1:5,])
+knitr::kable(rate_data[1:5,])
 ```
 
 Next, we proceed to relabel the State and Year columns by removing extra characters that do not provide significance in our visualizations. 
 
 
-```{r, clean-imprisonment-1, echo=TRUE}
+```{r, clean-imprisonment-1, echo=FALSE}
 # reformatting State columns 
 bad <- admissions_data[which(str_detect(admissions_data$State , '[:punct:]')),]$State
 admissions_data[which(str_detect(admissions_data$State , '[:punct:]')),]$State <- str_sub(bad, end = -3)
@@ -140,12 +146,14 @@ rate_data[1, 1] <- 'TOTAL'
 # rename certain year column 
 admissions_data <- rename(admissions_data, '2013' = "2013/b")
 releases_data <- rename(releases_data, '2013' = "2013/b,c", '2014' = '2014/c', '2015' = '2015/c')
-
+knitr::kable(admissions_data[1:5,])
+knitr::kable(releases_data[1:5,])
+knitr::kable(rate_data[1:5,])
 ```
 
 All of the three tables are in xlsx format so we will use `readxl` package to import it into R. These tables have the total number of prison admissions, releases, and imprisonment rates by year and by state. The states are along a column and the years are along a row so we will `pivot_longer()` function so that the final table has state, year and number of prisoners admitted/released/rates as columns.
 
-```{r, clean-imprisonment-2, echo=TRUE}
+```{r, clean-imprisonment-2, echo=FALSE}
 library("tidyr")
 # admissions data to long format
 admissions_data_long <- pivot_longer(admissions_data, cols = 2:ncol(admissions_data) , names_to = "Year", values_to = "Admissions")
@@ -160,7 +168,7 @@ rate_data_long <- pivot_longer(rate_data, cols = 2:ncol(rate_data) , names_to = 
 Now that we have converted all three data frames into the desired long format, we can proceed to apply an inner join on the admissions_data_long and releases_data_long by State and Year. Then we apply another inner join on the resulting data frame with the rate_data_long. Now we have one clean table that encapsulates five columns: State, Year, Admissions, Releases, and Rate and 1,512 rows of entries. 
 
 
-```{r, clean-imprisonment-3, echo=TRUE}
+```{r, clean-imprisonment-3, echo=FALSE}
 # inner merge on admissions and releases data
 admissions_releases_data <- merge(x=admissions_data_long, y=releases_data_long, 
              by=c("State", "Year"))
@@ -171,9 +179,8 @@ total_imprisonment_data <- merge(x=admissions_releases_data, y=rate_data_long,
 # adding factor levels to State and Year
 total_imprisonment_data$State <- as.factor(total_imprisonment_data$State)
 total_imprisonment_data$Year <- as.factor(total_imprisonment_data$Year)
+knitr::kable(total_imprisonment_data[1:5,])
 ```
-
-
 
 ## Missing value analysis
 
@@ -181,14 +188,14 @@ total_imprisonment_data$Year <- as.factor(total_imprisonment_data$Year)
 
 We visualize the missing data in the transformed crime data table
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library(naniar)
 vis_miss(crime_all_data)
 ```
 
 There are no missing values in Year, State, Area and Population. There are some missing values in crime categories other than arson, which we checked is actually blank in the raw data. We will fill these with 0. Arson has been blank or missing in all raw data across all years so we will drop that column.
 
-```{r, missing-crime, echo=TRUE}
+```{r, missing-crime, echo=FALSE}
 crime_all_data <- crime_all_data[, -14]
 crime_all_data[is.na(crime_all_data)] <- 0
 ```
@@ -198,7 +205,7 @@ crime_all_data[is.na(crime_all_data)] <- 0
 
 There are missing values through Admissions, Releases, and Rate values across States. However, the numbers are quite insignificant in comparison to the available data that is present in the `total_imprisonment_data` data frame.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library("ggplot2")
 # creating missing values list 
 missing_values <- total_imprisonment_data %>%
@@ -251,7 +258,7 @@ missing_row_plot <- total_imprisonment_data %>%
 
 According to the bar chart, Only 1.2% of Releases and Rate data are missing. Admissions takes the lead with 1.39% of missing values. We also plotted the missing values of rows in order to see if there is a pattern across different features. It seems that the missing values originate from a single row -- indicating that they are related to a specific state. 
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library("gridExtra") # for multiple plots
 grid.arrange(missing_percentage_plot, missing_row_plot, ncol = 2)
 ```
@@ -260,7 +267,7 @@ grid.arrange(missing_percentage_plot, missing_row_plot, ncol = 2)
 Now we will highlight missing values of specific States. There some missing values for Alabama and New Hampshire for Admissions data. There are also missing values across all variables for District of Columbia from 2001-2019 since sentenced felons were the responsibility of the Federal Bureau of Prisons during these years. We will keep these entries since we are simply visualizing information provided from the National Prisoner Statistics (NPS) program.
 
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 # getting missing values percentages
 missing_values_states <- total_imprisonment_data %>%
   group_by(State) %>%

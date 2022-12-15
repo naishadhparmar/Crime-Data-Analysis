@@ -1,20 +1,12 @@
 # Results
 
-```{r, echo=FALSE, include=FALSE}
-library(knitr)
-source(purl("data.Rmd", quiet=TRUE))
-```
-
-```{r, ref.label=c('load-crime', 'clean-crime-1', 'clean-crime-2', 'clean-crime-3', 'missing-crime', 'load-imprisonment', 'clean-imprisonment-1', 'clean-imprisonment-2', 'clean-imprisonment-3')}
-```
-
 ## Analysis of crime and imprisonment
 
 ### Crime
 
 Crime rate is the number of crimes per 100,000 population. Below is the trend of crime rate from 1999 to 2019.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -32,7 +24,7 @@ crime_all_data %>%
 
 Clearly, property crime has a higher incidence rate than violent crimes which is to be expected. We can also observe a general downward trend for both kinds of crime, however less pronounced for violent crimes. We now look at a statewise heatmap to identify which states have the highest crime incidence.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 
 library(dplyr)
 library(tidyr)
@@ -56,7 +48,7 @@ In terms of state totals, the worst crime rate in recent years is in District of
 
 Imprisonment rate is the number of prisoners per 100,000 population. Below is the trend of imprisonment rate.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 total_imprisonment_data %>% 
   filter(State=='TOTAL') %>%
   ggplot() + 
@@ -70,7 +62,7 @@ Clearly the imprisonment rate has started dipping since 2008 (the year the admin
 
 Below is the trend of imprisonment admissions and releases.
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 total_imprisonment_data %>% 
   filter(State=='TOTAL') %>%
   pivot_longer(cols = c('Admissions', 'Releases'), names_to = 'Imprisonment') %>%
@@ -91,7 +83,7 @@ We also see a drastic increase in California Admissions and Releases where value
 
 This is not the case with Rate -- it seems the imprisonment rate has gradually increased throughout the years across all states except Minnesota, Massachusetts and Maine where the rate has somewhat stabilized. 
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 # Heatmap time series of Admissions, Rate, and Releases across all states
 total_imprisonment_data %>% 
   filter(State != 'TOTAL') %>%  
@@ -110,7 +102,7 @@ In terms of state totals, the worst imprisonment in recent years is in Californi
 
 ## Analysis of imprisonment with crime
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 shortlisted_states <- c('DISTRICT OF COLUMBIA', 'ALASKA', 'ARKANSAS', 'NEW MEXICO', 'WEST VIRGINIA', 'VERMONT', 'NEW HAMPSHIRE', 'CONNECTICUT', 'CALIFORNIA', 'TEXAS', 'FLORIDA', 'ILLINOIS', 'MASSACHUSETTS', 'MAINE', 'MINNESOTA')
 min_max_crime_rate <- crime_all_data %>%
   group_by(State) %>%
@@ -141,7 +133,7 @@ crime_all_data %>%
 
 As mentioned in the proposal, we will analyze and emphasize on the years that the following policies were placed into effect in the U.S. We will also consider the presidential party during these highlighted years. Major justice policy changes are listed in [this article](https://stacker.com/stories/5542/history-us-justice-system). This article has led to discovering the following major policy changes which will be a part of this project:
 
-```{r, echo=TRUE}
+```{r, echo=FALSE}
 # table of key legislation updates
 key_events <- data.frame( Policy = c("Comprehensive Crime Control Act", "Violent Crime Control and Law Enforcement Act", "Atkins v. Virginia", "Riley v. California", "New Clemency Initiative"), 
                           Year = c("1984", "1984", "2002", "2014", "2014"), 
